@@ -24,7 +24,7 @@ window.onload = async () => {
 
 let getContentHtml = async (html) => {
 
-	const content = await fetch(`/views/${html}.html`)
+	const content = await fetch(`../views/${html}.html`)
 	return await content.text()
 
 }
