@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>ViajeSeguro</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/styles/main.css">
+	<script src="https://kit.fontawesome.com/b7219096b7.js" crossorigin="anonymous"></script>
+</head>
+<body id="login-page">
+	
+	<header></header>
+
+	<main>
+		<div class="brands">
+			<img src="/images/logo-sutran.png" alt="Sutran">
+			<img src="/images/logo-mtc.png" alt="Ministerio de Transportes y Comunicaciones">
+		</div>
+		<div class="content">
+			<form id="form-login">
+				<span class="pre">Administrador</span>
+				<h1>ViajeSeguro</h1>
+				<label class="textfield">
+					<span class="placeholder">Usuario</span>
+					<i class="fas fa-user-alt" aria-hidden="true"></i>
+					<input type="text">
+				</label>
+				<label class="textfield">
+					<span class="placeholder">Contrase&ntilde;a</span>
+					<i class="fas fa-key" aria-hidden="true"></i>
+					<input type="password">
+					<i class="fas fa-eye show-pwd" aria-hidden="true"></i>
+				</label>
+				<label for="check-remember" class="checkbox">
+					<i class="far fa-square" aria-hidden="true"></i>
+					<input type="checkbox" id="check-remember">
+					<span>Recordar usuario</span>
+				</label>
+				<button id="login" type="button">Ingresar</button>
+			</form>
+		</div>
+	</main>
+
+	<footer></footer>
+
+	<script type="text/javascript" src="/scripts/jquery.js"></script>
+	<script type="text/javascript" src="/scripts/main.js"></script>
+
+	<script type="text/javascript">
+
+		$('#login').click(() => {
+			location.href = "/views/dashboard.html"
+		})
+		
+	</script>
+	
+</body>
+</html>

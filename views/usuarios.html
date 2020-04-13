@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>ViajeSeguro</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/styles/main.css">
+	<script src="https://kit.fontawesome.com/b7219096b7.js" crossorigin="anonymous"></script>
+</head>
+<body id="usuarios-page">
+	
+	<aside></aside>
+
+	<main>
+
+		<header></header>
+
+		<div class="content">
+			<div class="box description">
+				<a class="back" href="javascript:history.back()"><i class="fas fa-arrow-left" aria-hidden="true"></i>Volver</a>
+				<div>
+					<div>
+						<h1>Usuarios</h1>
+						<p>Visualiza o descarga la informaci&oacute;n de usuarios registrados en la plataforma ViajeSeguro.</p>
+					</div>
+					<a class="button-blue" href="javascript:void(0)">Descargar</a>
+				</div>
+			</div>
+
+			<div class="box table">
+				<table id="user-table">
+					<thead><tr>
+						<th>UID</th>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Correo electr&oacute;nico</th>
+						<th>Usuario</th>
+						<th>Tipo documento</th>
+						<th>Nro documento</th>
+					</tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+		
+	</main>
+
+	<script type="text/javascript" src="/scripts/jquery.js"></script>
+	<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="/scripts/main.js"></script>
+
+	<script type="text/javascript">
+
+		const testUsers = [{
+			"uid": "9276577459",
+			"name": "Abby",
+			"lastname": "Anear",
+			"email": "aanear0@businessinsider.com",
+			"username": "aanear0",
+			"typedoc": "DNI",
+			"numberdoc": 54326822
+		}, {
+			"uid": "7709782477",
+			"name": "Travers",
+			"lastname": "Landsbury",
+			"email": "tlandsbury1@bbc.co.uk",
+			"username": "tlandsbury1",
+			"typedoc": "Pasaporte",
+			"numberdoc": 20789011
+		}, {
+			"uid": "1848358032",
+			"name": "Edith",
+			"lastname": "Rudledge",
+			"email": "erudledge2@eventbrite.com",
+			"username": "erudledge2",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 14255091
+		}, {
+			"uid": "4721882815",
+			"name": "Dixie",
+			"lastname": "Trevenu",
+			"email": "dtrevenu3@mlb.com",
+			"username": "dtrevenu3",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 89195076
+		}, {
+			"uid": "7344345064",
+			"name": "Kyle",
+			"lastname": "Mence",
+			"email": "kmence4@amazon.co.jp",
+			"username": "kmence4",
+			"typedoc": "Pasaporte",
+			"numberdoc": 36294422
+		}, {
+			"uid": "9977572100",
+			"name": "Fonzie",
+			"lastname": "Brood",
+			"email": "fbrood5@vistaprint.com",
+			"username": "fbrood5",
+			"typedoc": "DNI",
+			"numberdoc": 88174876
+		}, {
+			"uid": "9384742120",
+			"name": "Frannie",
+			"lastname": "Fice",
+			"email": "ffice6@boston.com",
+			"username": "ffice6",
+			"typedoc": "Pasaporte",
+			"numberdoc": 80776928
+		}, {
+			"uid": "7684966561",
+			"name": "Susette",
+			"lastname": "Crother",
+			"email": "scrother7@cbc.ca",
+			"username": "scrother7",
+			"typedoc": "Pasaporte",
+			"numberdoc": 44264738
+		}, {
+			"uid": "5261761077",
+			"name": "Keary",
+			"lastname": "Carillo",
+			"email": "kcarillo8@seesaa.net",
+			"username": "kcarillo8",
+			"typedoc": "DNI",
+			"numberdoc": 56508655
+		}, {
+			"uid": "3951702850",
+			"name": "Thebault",
+			"lastname": "Penrice",
+			"email": "tpenrice9@home.pl",
+			"username": "tpenrice9",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 42265792
+		}, {
+			"uid": "0881176087",
+			"name": "Roanna",
+			"lastname": "Keysel",
+			"email": "rkeysela@guardian.co.uk",
+			"username": "rkeysela",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 16511578
+		}, {
+			"uid": "2958522172",
+			"name": "Cindie",
+			"lastname": "Tukely",
+			"email": "ctukelyb@deliciousdays.com",
+			"username": "ctukelyb",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 24055568
+		}, {
+			"uid": "2521809985",
+			"name": "Elinore",
+			"lastname": "Rosenblath",
+			"email": "erosenblathc@comcast.net",
+			"username": "erosenblathc",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 53658936
+		}, {
+			"uid": "6333701548",
+			"name": "Ezmeralda",
+			"lastname": "Tarzey",
+			"email": "etarzeyd@yale.edu",
+			"username": "etarzeyd",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 28910259
+		}, {
+			"uid": "6812186171",
+			"name": "Flynn",
+			"lastname": "Wurz",
+			"email": "fwurze@sogou.com",
+			"username": "fwurze",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 43840772
+		}, {
+			"uid": "6336486419",
+			"name": "Rey",
+			"lastname": "Kean",
+			"email": "rkeanf@webnode.com",
+			"username": "rkeanf",
+			"typedoc": "DNI",
+			"numberdoc": 56414548
+		}, {
+			"uid": "8229255296",
+			"name": "Roosevelt",
+			"lastname": "Beere",
+			"email": "rbeereg@aboutads.info",
+			"username": "rbeereg",
+			"typedoc": "DNI",
+			"numberdoc": 31635235
+		}, {
+			"uid": "2198536277",
+			"name": "Gaspar",
+			"lastname": "Morrad",
+			"email": "gmorradh@live.com",
+			"username": "gmorradh",
+			"typedoc": "DNI",
+			"numberdoc": 32074363
+		}, {
+			"uid": "7488251075",
+			"name": "Hildagard",
+			"lastname": "Silcox",
+			"email": "hsilcoxi@kickstarter.com",
+			"username": "hsilcoxi",
+			"typedoc": "Carnet de extranjería",
+			"numberdoc": 10198027
+		}, {
+			"uid": "7408165258",
+			"name": "Dreddy",
+			"lastname": "Canepe",
+			"email": "dcanepej@geocities.com",
+			"username": "dcanepej",
+			"typedoc": "DNI",
+			"numberdoc": 24875231
+		}]
+
+		const table = $('#user-table tbody')
+		table.empty()
+		testUsers.forEach(user => {
+			const html = `
+				<tr>
+					<td>${user.uid}</td>
+					<td>${user.name}</td>
+					<td>${user.lastname}</td>
+					<td>${user.email}</td>
+					<td>${user.username}</td>
+					<td>${user.typedoc}</td>
+					<td>${user.numberdoc}</td>
+				</tr>
+			`
+
+			table.append(html)
+		})
+
+		$('#user-table').DataTable({
+			pageLength: 5,
+			lengthChange: false,
+			autoWidth: false,
+			language: {
+				search: 'Buscar usuario',
+				info: 'Página _START_ de _END_',
+				infoEmpty: 'No hay usuarios registrados',
+				paginate: {
+					previous: '<i class="fas fa-angle-left" aria-hidden="true"></i>',
+					next: '<i class="fas fa-angle-right" aria-hidden="true"></i>'
+				}
+			}
+		})
+			
+	</script>
+	
+</body>
+</html>

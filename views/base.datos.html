@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>ViajeSeguro</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/styles/main.css">
+	<script src="https://kit.fontawesome.com/b7219096b7.js" crossorigin="anonymous"></script>
+</head>
+<body id="base-datos-page">
+	
+	<aside></aside>
+
+	<main>
+
+		<header></header>
+
+		<div class="content">
+			<div class="box description">
+				<a class="back" href="javascript:history.back()"><i class="fas fa-arrow-left" aria-hidden="true"></i>Volver</a>
+				<div>
+					<div>
+						<h1>Base de datos</h1>
+						<p>Visualiza, descarga o edita la informaci&oacute;n de agencias, empresas de transporte y rutas de la aplicaci&oacute;n ViajeSeguro.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="modules">
+				<div class="tabs">
+					<button type="button" data-tab="empresas" class="tab active">
+						<i class="fas fa-bus" aria-hidden="true"></i>
+						<span>Empresas de transporte</span>
+					</button>
+					<button type="button" data-tab="agencias" class="tab">
+						<i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+						<span>Agencias</span>
+					</button>
+					<button type="button" data-tab="rutas" class="tab">
+						<i class="fas fa-directions" aria-hidden="true"></i>
+						<span>Rutas</span>
+					</button>
+				</div>
+				<div class="box">
+					<div class="tab-content tab-content-active" data-content="empresas">
+						<table id="empresas-table">
+							<thead><tr>
+								<th>ID</th>
+								<th>RUC</th>
+								<th>Raz&oacute;n Social</th>
+								<th>Nombre comercial</th>
+								<th>Estado</th>
+								<th>Acciones</th>
+							</tr></thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="tab-content" data-content="agencias">
+						<table id="agencias-table">
+							<thead><tr>
+								<th>ID</th>
+								<th>RUC</th>
+								<th>Empresa</th>
+								<th>Correo electr&oacute;nico</th>
+								<th>Tel&eacute;fono</th>
+								<th>Tipo</th>
+								<th>Direcci&oacute;n</th>
+								<th>Departamento</th>
+								<th>Provincia</th>
+								<th>Distrito</th>
+								<th>Latitud</th>
+								<th>Longitud</th>
+								<th>Acciones</th>
+							</tr></thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="tab-content" data-content="rutas">
+						<table id="rutas-table">
+							<thead><tr>
+								<th>ID</th>
+								<th>Empresa</th>
+								<th>Inicio</th>
+								<th>Fin</th>
+								<th>Descripci&oacute;n</th>
+								<th>RUC</th>
+								<th>Estado</th>
+								<th>Acciones</th>
+							</tr></thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</main>
+
+	<script type="text/javascript" src="/scripts/jquery.js"></script>
+	<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="/scripts/main.js"></script>
+
+	<script type="text/javascript">
+
+	$('.tab').click(e => {
+		const t = $(e.target)
+		const content = t.attr('data-tab')
+
+		const active = $('.tab-content-active').attr('data-tab')
+		if(content != active){
+			t.addClass('active').siblings('button').removeClass('active')
+			$(`.tab-content[data-content="${content}"]`).addClass('tab-content-active')
+			$('.tab-content-active').slideUp('fast', () => {
+				$(`.tab-content[data-content="${content}"]`).slideDown('fast')
+			})
+		}
+	})
+	
+	const testEmpresas = [{
+		"id": 1,
+		"ruc": "4002132129",
+		"razonSocial": "Reynolds-Wehner S.A.",
+		"nombreComercial": "Huels-Hauck",
+		"estado": "Activo"
+	}, {
+		"id": 2,
+		"ruc": "3036640754",
+		"razonSocial": "Blick, Pagac and Bins S.A.",
+		"nombreComercial": "Flatley, Mueller and Sauer",
+		"estado": "Inactivo"
+	}, {
+		"id": 3,
+		"ruc": "5261127386",
+		"razonSocial": "Auer Inc S.A.",
+		"nombreComercial": "Kohler Inc",
+		"estado": "Inactivo"
+	}, {
+		"id": 4,
+		"ruc": "7514965289",
+		"razonSocial": "Ernser-Rau S.A.",
+		"nombreComercial": "Oberbrunner and Sons",
+		"estado": "Activo"
+	}, {
+		"id": 5,
+		"ruc": "9653341006",
+		"razonSocial": "Feil LLC S.A.",
+		"nombreComercial": "Feeney-Jakubowski",
+		"estado": "Activo"
+	}, {
+		"id": 6,
+		"ruc": "3246255636",
+		"razonSocial": "Parker, Senger and Pfeffer S.A.",
+		"nombreComercial": "Hettinger and Sons",
+		"estado": "Activo"
+	}, {
+		"id": 7,
+		"ruc": "5246219593",
+		"razonSocial": "Rowe-Kuhic S.A.",
+		"nombreComercial": "Harris and Sons",
+		"estado": "Inactivo"
+	}, {
+		"id": 8,
+		"ruc": "4055527128",
+		"razonSocial": "Rohan-Ortiz S.A.",
+		"nombreComercial": "Gusikowski, Hyatt and Cronin",
+		"estado": "Inactivo"
+	}, {
+		"id": 9,
+		"ruc": "0110432509",
+		"razonSocial": "Hahn, Doyle and Rippin S.A.",
+		"nombreComercial": "Hayes and Sons",
+		"estado": "Inactivo"
+	}, {
+		"id": 10,
+		"ruc": "6649274844",
+		"razonSocial": "McCullough-Konopelski S.A.",
+		"nombreComercial": "Hirthe-Weimann",
+		"estado": "Activo"
+	}, {
+		"id": 11,
+		"ruc": "5437058691",
+		"razonSocial": "Lang and Sons S.A.",
+		"nombreComercial": "Prosacco, Swift and Kulas",
+		"estado": "Activo"
+	}, {
+		"id": 12,
+		"ruc": "3899700317",
+		"razonSocial": "Ratke-Jerde S.A.",
+		"nombreComercial": "Fritsch-Brekke",
+		"estado": "Activo"
+	}, {
+		"id": 13,
+		"ruc": "5972029642",
+		"razonSocial": "Littel LLC S.A.",
+		"nombreComercial": "Stokes, Stehr and White",
+		"estado": "Activo"
+	}, {
+		"id": 14,
+		"ruc": "5920257962",
+		"razonSocial": "Hilpert LLC S.A.",
+		"nombreComercial": "Herman-D'Amore",
+		"estado": "Activo"
+	}, {
+		"id": 15,
+		"ruc": "1058264109",
+		"razonSocial": "Ward-Mills S.A.",
+		"nombreComercial": "Berge, Farrell and Tromp",
+		"estado": "Activo"
+	}, {
+		"id": 16,
+		"ruc": "8459654591",
+		"razonSocial": "Bauch and Sons S.A.",
+		"nombreComercial": "Kling, Klein and Metz",
+		"estado": "Inactivo"
+	}, {
+		"id": 17,
+		"ruc": "9352712307",
+		"razonSocial": "Bashirian LLC S.A.",
+		"nombreComercial": "Gusikowski Inc",
+		"estado": "Inactivo"
+	}, {
+		"id": 18,
+		"ruc": "4424955206",
+		"razonSocial": "Rowe LLC S.A.",
+		"nombreComercial": "McLaughlin and Sons",
+		"estado": "Activo"
+	}, {
+		"id": 19,
+		"ruc": "4023458007",
+		"razonSocial": "Hickle Inc S.A.",
+		"nombreComercial": "Towne-Stracke",
+		"estado": "Inactivo"
+	}, {
+		"id": 20,
+		"ruc": "3080729420",
+		"razonSocial": "Leffler-Langosh S.A.",
+		"nombreComercial": "Harris, Willms and Prosacco",
+		"estado": "Activo"
+	}]
+
+	const tableEmpresas = $('#empresas-table tbody')
+	tableEmpresas.empty()
+	testEmpresas.forEach(emp => {
+		const html = `
+			<tr>
+				<td>${emp.id}</td>
+				<td>${emp.ruc}</td>
+				<td>${emp.razonSocial}</td>
+				<td>${emp.nombreComercial}</td>
+				<td>${emp.estado}</td>
+				<td class="acciones">
+					<button class="edit"><i class="fas fa-pen" aria-hidden="true"></i></button>
+					<button class="delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
+				</td>
+			</tr>
+		`
+
+		tableEmpresas.append(html)
+	})
+
+	const testAgencias = [{
+		"id": 1,
+		"ruc": "3376772657",
+		"empresa": "Homenick, Schinner and Moen S.A.",
+		"correoElectronico": "bivashkin0@google.co.jp",
+		"telefono": "559-578-5848",
+		"tipo": "Terminal",
+		"direccion": "49965 Sloan Street",
+		"departamento": "Modesto",
+		"provincia": "California",
+		"distrito": "Crowley",
+		"latitud": "37.6409",
+		"longitud": "-120.9749"
+	}, {
+		"id": 2,
+		"ruc": "7386375077",
+		"empresa": "Blanda-O'Keefe S.A.",
+		"correoElectronico": "abarensky1@indiegogo.com",
+		"telefono": "330-689-8863",
+		"tipo": "Terminal",
+		"direccion": "4 Valley Edge Alley",
+		"departamento": "Akron",
+		"provincia": "Ohio",
+		"distrito": "Weeping Birch",
+		"latitud": "41.0655",
+		"longitud": "-81.5203"
+	}, {
+		"id": 3,
+		"ruc": "9138548011",
+		"empresa": "Steuber-Bins S.A.",
+		"correoElectronico": "scampanelle2@washingtonpost.com",
+		"telefono": "313-758-2046",
+		"tipo": "Terminal",
+		"direccion": "09295 Pawling Pass",
+		"departamento": "Detroit",
+		"provincia": "Michigan",
+		"distrito": "Bultman",
+		"latitud": "42.2399",
+		"longitud": "-83.1508"
+	}, {
+		"id": 4,
+		"ruc": "3311811100",
+		"empresa": "Roberts LLC S.A.",
+		"correoElectronico": "cmcalroy3@unicef.org",
+		"telefono": "212-743-9696",
+		"tipo": "Terminal",
+		"direccion": "03 Elka Trail",
+		"departamento": "New York City",
+		"provincia": "New York",
+		"distrito": "Armistice",
+		"latitud": "40.7808",
+		"longitud": "-73.9772"
+	}, {
+		"id": 5,
+		"ruc": "2878986784",
+		"empresa": "Lueilwitz Group S.A.",
+		"correoElectronico": "ealbarez4@icio.us",
+		"telefono": "816-649-4258",
+		"tipo": "Agencia",
+		"direccion": "9 Boyd Court",
+		"departamento": "Saint Joseph",
+		"provincia": "Missouri",
+		"distrito": "Packers",
+		"latitud": "39.7076",
+		"longitud": "-94.8677"
+	}, {
+		"id": 6,
+		"ruc": "9662741097",
+		"empresa": "O'Keefe, Wintheiser and Stoltenberg S.A.",
+		"correoElectronico": "asummersett5@addtoany.com",
+		"telefono": "661-356-7668",
+		"tipo": "Terminal",
+		"direccion": "9264 Fairfield Plaza",
+		"departamento": "Bakersfield",
+		"provincia": "California",
+		"distrito": "Northwestern",
+		"latitud": "35.2944",
+		"longitud": "-118.9052"
+	}, {
+		"id": 7,
+		"ruc": "3985735980",
+		"empresa": "Bruen-Casper S.A.",
+		"correoElectronico": "dmews6@globo.com",
+		"telefono": "239-530-2297",
+		"tipo": "Terminal",
+		"direccion": "80 Havey Alley",
+		"departamento": "Fort Myers",
+		"provincia": "Florida",
+		"distrito": "Charing Cross",
+		"latitud": "26.5529",
+		"longitud": "-81.9486"
+	}, {
+		"id": 8,
+		"ruc": "4472314843",
+		"empresa": "Borer Inc S.A.",
+		"correoElectronico": "sbroodes7@free.fr",
+		"telefono": "718-136-0392",
+		"tipo": "Agencia",
+		"direccion": "8 Scott Avenue",
+		"departamento": "Bronx",
+		"provincia": "New York",
+		"distrito": "Nelson",
+		"latitud": "40.8702",
+		"longitud": "-73.8495"
+	}, {
+		"id": 9,
+		"ruc": "0841966141",
+		"empresa": "Herman-Parker S.A.",
+		"correoElectronico": "lmerrison8@usda.gov",
+		"telefono": "727-906-5514",
+		"tipo": "Terminal",
+		"direccion": "4519 Heath Parkway",
+		"departamento": "Tampa",
+		"provincia": "Florida",
+		"distrito": "Calypso",
+		"latitud": "28.0726",
+		"longitud": "-82.559"
+	}, {
+		"id": 10,
+		"ruc": "1150337206",
+		"empresa": "Osinski and Sons S.A.",
+		"correoElectronico": "bfarnie9@pcworld.com",
+		"telefono": "478-271-6475",
+		"tipo": "Agencia",
+		"direccion": "6 Union Alley",
+		"departamento": "Macon",
+		"provincia": "Georgia",
+		"distrito": "Scott",
+		"latitud": "32.8067",
+		"longitud": "-83.6913"
+	}, {
+		"id": 11,
+		"ruc": "8853311541",
+		"empresa": "Breitenberg-Watsica S.A.",
+		"correoElectronico": "aroulstona@buzzfeed.com",
+		"telefono": "432-584-5844",
+		"tipo": "Agencia",
+		"direccion": "00206 Bayside Park",
+		"departamento": "Odessa",
+		"provincia": "Texas",
+		"distrito": "Lindbergh",
+		"latitud": "31.7466",
+		"longitud": "-102.567"
+	}, {
+		"id": 12,
+		"ruc": "0659980630",
+		"empresa": "Koch and Sons S.A.",
+		"correoElectronico": "selphickb@prweb.com",
+		"telefono": "716-686-8776",
+		"tipo": "Terminal",
+		"direccion": "3263 Mcguire Street",
+		"departamento": "Buffalo",
+		"provincia": "New York",
+		"distrito": "Fairview",
+		"latitud": "42.9335",
+		"longitud": "-78.8115"
+	}, {
+		"id": 13,
+		"ruc": "3947906919",
+		"empresa": "Hammes-Quigley S.A.",
+		"correoElectronico": "mmcnellyc@list-manage.com",
+		"telefono": "434-827-3715",
+		"tipo": "Agencia",
+		"direccion": "83681 Village Park",
+		"departamento": "Charlottesville",
+		"provincia": "Virginia",
+		"distrito": "Lakewood",
+		"latitud": "38.0401",
+		"longitud": "-78.4851"
+	}, {
+		"id": 14,
+		"ruc": "4872833376",
+		"empresa": "Glover and Sons S.A.",
+		"correoElectronico": "cswitsurd@uol.com.br",
+		"telefono": "228-429-4942",
+		"tipo": "Agencia",
+		"direccion": "13340 Grasskamp Point",
+		"departamento": "Gulfport",
+		"provincia": "Mississippi",
+		"distrito": "Hansons",
+		"latitud": "30.4158",
+		"longitud": "-89.0684"
+	}, {
+		"id": 15,
+		"ruc": "1031011544",
+		"empresa": "McKenzie-Wilkinson S.A.",
+		"correoElectronico": "abeae@tmall.com",
+		"telefono": "225-660-5174",
+		"tipo": "Terminal",
+		"direccion": "9 Monica Avenue",
+		"departamento": "Baton Rouge",
+		"provincia": "Louisiana",
+		"distrito": "Grover",
+		"latitud": "30.486",
+		"longitud": "-91.1481"
+	}, {
+		"id": 16,
+		"ruc": "2962298990",
+		"empresa": "Bogan Group S.A.",
+		"correoElectronico": "ssprayf@merriam-webster.com",
+		"telefono": "937-151-6001",
+		"tipo": "Agencia",
+		"direccion": "4217 Morning Center",
+		"departamento": "Dayton",
+		"provincia": "Ohio",
+		"distrito": "Cambridge",
+		"latitud": "39.7617",
+		"longitud": "-84.1498"
+	}, {
+		"id": 17,
+		"ruc": "0038622130",
+		"empresa": "Pouros Group S.A.",
+		"correoElectronico": "mrateg@independent.co.uk",
+		"telefono": "817-131-7925",
+		"tipo": "Agencia",
+		"direccion": "31 Ilene Place",
+		"departamento": "Fort Worth",
+		"provincia": "Texas",
+		"distrito": "Florence",
+		"latitud": "32.6796",
+		"longitud": "-97.3336"
+	}, {
+		"id": 18,
+		"ruc": "6322798405",
+		"empresa": "Anderson, VonRueden and Ziemann S.A.",
+		"correoElectronico": "kandriuzzih@wiley.com",
+		"telefono": "408-357-7527",
+		"tipo": "Terminal",
+		"direccion": "417 American Lane",
+		"departamento": "San Jose",
+		"provincia": "California",
+		"distrito": "High Crossing",
+		"latitud": "37.2458",
+		"longitud": "-121.8306"
+	}, {
+		"id": 19,
+		"ruc": "1545044805",
+		"empresa": "Eichmann-Roberts S.A.",
+		"correoElectronico": "ssprayi@ebay.com",
+		"telefono": "540-395-8358",
+		"tipo": "Agencia",
+		"direccion": "0 Morrow Point",
+		"departamento": "Roanoke",
+		"provincia": "Virginia",
+		"distrito": "Loomis",
+		"latitud": "37.2742",
+		"longitud": "-79.9579"
+	}, {
+		"id": 20,
+		"ruc": "8977259134",
+		"empresa": "Aufderhar Group S.A.",
+		"correoElectronico": "ggoodbarnej@elegantthemes.com",
+		"telefono": "518-654-6845",
+		"tipo": "Terminal",
+		"direccion": "1 Del Sol Avenue",
+		"departamento": "Albany",
+		"provincia": "New York",
+		"distrito": "Fairview",
+		"latitud": "42.6853",
+		"longitud": "-73.8253"
+	}]
+
+	const tableAgencias = $('#agencias-table tbody')
+	tableAgencias.empty()
+	testAgencias.forEach(agencia => {
+		const html = `
+			<tr>
+				<td>${agencia.id}</td>
+				<td>${agencia.ruc}</td>
+				<td>${agencia.empresa}</td>
+				<td>${agencia.correoElectronico}</td>
+				<td>${agencia.telefono}</td>
+				<td>${agencia.tipo}</td>
+				<td>${agencia.direccion}</td>
+				<td>${agencia.departamento}</td>
+				<td>${agencia.provincia}</td>
+				<td>${agencia.distrito}</td>
+				<td>${agencia.latitud}</td>
+				<td>${agencia.longitud}</td>
+				<td class="acciones">
+					<button class="edit"><i class="fas fa-pen" aria-hidden="true"></i></button>
+					<button class="delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
+				</td>
+			</tr>
+		`
+
+		tableAgencias.append(html)
+	})
+
+	const testRutas = [{
+		"id": 1,
+		"empresa": "Ward, Conn and D'Amore S.A.",
+		"inicio": "Texas",
+		"fin": "District of Columbia",
+		"descripcion": "Pellentesque eget nunc.",
+		"ruc": "9766555230",
+		"estado": "Activo"
+	}, {
+		"id": 2,
+		"empresa": "Cremin, Kling and Leffler S.A.",
+		"inicio": "Pennsylvania",
+		"fin": "Michigan",
+		"descripcion": "Praesent lectus.",
+		"ruc": "5750820572",
+		"estado": "Inactivo"
+	}, {
+		"id": 3,
+		"empresa": "Heidenreich Group S.A.",
+		"inicio": "Virginia",
+		"fin": "Ohio",
+		"descripcion": "Nullam sit amet turpis elementum ligula vehicula consequat.",
+		"ruc": "8225353714",
+		"estado": "Inactivo"
+	}, {
+		"id": 4,
+		"empresa": "Keeling and Sons S.A.",
+		"inicio": "Michigan",
+		"fin": "Indiana",
+		"descripcion": "Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+		"ruc": "5447177405",
+		"estado": "Activo"
+	}, {
+		"id": 5,
+		"empresa": "Klein, Reynolds and Bergnaum S.A.",
+		"inicio": "Indiana",
+		"fin": "Texas",
+		"descripcion": "In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+		"ruc": "1723077569",
+		"estado": "Inactivo"
+	}, {
+		"id": 6,
+		"empresa": "Rosenbaum LLC S.A.",
+		"inicio": "Nebraska",
+		"fin": "Texas",
+		"descripcion": "Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
+		"ruc": "2818445280",
+		"estado": "Activo"
+	}, {
+		"id": 7,
+		"empresa": "Jenkins Group S.A.",
+		"inicio": "North Carolina",
+		"fin": "District of Columbia",
+		"descripcion": "In eleifend quam a odio. In hac habitasse platea dictumst.",
+		"ruc": "1178745066",
+		"estado": "Inactivo"
+	}, {
+		"id": 8,
+		"empresa": "Quigley Group S.A.",
+		"inicio": "California",
+		"fin": "California",
+		"descripcion": "Aenean sit amet justo. Morbi ut odio.",
+		"ruc": "8276789471",
+		"estado": "Activo"
+	}, {
+		"id": 9,
+		"empresa": "Gleason, Funk and McDermott S.A.",
+		"inicio": "Hawaii",
+		"fin": "North Carolina",
+		"descripcion": "Phasellus in felis.",
+		"ruc": "4059227560",
+		"estado": "Activo"
+	}, {
+		"id": 10,
+		"empresa": "Stanton Inc S.A.",
+		"inicio": "Texas",
+		"fin": "California",
+		"descripcion": "Morbi quis tortor id nulla ultrices aliquet.",
+		"ruc": "6729039310",
+		"estado": "Activo"
+	}, {
+		"id": 11,
+		"empresa": "Wintheiser-Jaskolski S.A.",
+		"inicio": "Alabama",
+		"fin": "Louisiana",
+		"descripcion": "Nunc rhoncus dui vel sem. Sed sagittis.",
+		"ruc": "3126150888",
+		"estado": "Activo"
+	}, {
+		"id": 12,
+		"empresa": "Wiegand LLC S.A.",
+		"inicio": "Florida",
+		"fin": "District of Columbia",
+		"descripcion": "Vestibulum rutrum rutrum neque.",
+		"ruc": "4501130148",
+		"estado": "Activo"
+	}, {
+		"id": 13,
+		"empresa": "Swift-Thompson S.A.",
+		"inicio": "Texas",
+		"fin": "Texas",
+		"descripcion": "Aenean sit amet justo.",
+		"ruc": "9192667023",
+		"estado": "Activo"
+	}, {
+		"id": 14,
+		"empresa": "Boyer Group S.A.",
+		"inicio": "Texas",
+		"fin": "Georgia",
+		"descripcion": "In sagittis dui vel nisl. Duis ac nibh.",
+		"ruc": "9982044524",
+		"estado": "Activo"
+	}, {
+		"id": 15,
+		"empresa": "Beahan-Krajcik S.A.",
+		"inicio": "California",
+		"fin": "Kansas",
+		"descripcion": "Nulla mollis molestie lorem.",
+		"ruc": "6747207556",
+		"estado": "Activo"
+	}, {
+		"id": 16,
+		"empresa": "Willms, Ziemann and Balistreri S.A.",
+		"inicio": "Virginia",
+		"fin": "Texas",
+		"descripcion": "Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.",
+		"ruc": "9794353515",
+		"estado": "Inactivo"
+	}, {
+		"id": 17,
+		"empresa": "Mosciski LLC S.A.",
+		"inicio": "Indiana",
+		"fin": "California",
+		"descripcion": "Curabitur convallis.",
+		"ruc": "4593045223",
+		"estado": "Activo"
+	}, {
+		"id": 18,
+		"empresa": "Lakin-Farrell S.A.",
+		"inicio": "Florida",
+		"fin": "Florida",
+		"descripcion": "Sed accumsan felis.",
+		"ruc": "1428958606",
+		"estado": "Inactivo"
+	}, {
+		"id": 19,
+		"empresa": "Graham, Gibson and Kuphal S.A.",
+		"inicio": "Utah",
+		"fin": "Wisconsin",
+		"descripcion": "Suspendisse potenti.",
+		"ruc": "9744468610",
+		"estado": "Activo"
+	}, {
+		"id": 20,
+		"empresa": "Yost Group S.A.",
+		"inicio": "Washington",
+		"fin": "Ohio",
+		"descripcion": "Etiam pretium iaculis justo. In hac habitasse platea dictumst.",
+		"ruc": "4975197693",
+		"estado": "Activo"
+	}]
+
+	const tableRutas = $('#rutas-table tbody')
+	tableRutas.empty()
+	testRutas.forEach(ruta => {
+		const html = `
+			<tr>
+				<td>${ruta.id}</td>
+				<td>${ruta.empresa}</td>
+				<td>${ruta.inicio}</td>
+				<td>${ruta.fin}</td>
+				<td>${ruta.descripcion}</td>
+				<td>${ruta.ruc}</td>
+				<td>${ruta.estado}</td>
+				<td class="acciones">
+					<button class="edit"><i class="fas fa-pen" aria-hidden="true"></i></button>
+					<button class="delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
+				</td>
+			</tr>
+		`
+
+		tableRutas.append(html)
+	})
+
+	$('table').DataTable({
+			pageLength: 5,
+			lengthChange: false,
+			language: {
+				search: 'Buscar usuario',
+				info: 'Página _START_ de _END_',
+				emptyTable: 'No hay datos para mostrar',
+				paginate: {
+					previous: '<i class="fas fa-angle-left" aria-hidden="true"></i>',
+					next: '<i class="fas fa-angle-right" aria-hidden="true"></i>'
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>

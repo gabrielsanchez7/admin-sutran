@@ -1,0 +1,153 @@
+$font: 'Montserrat', sans-serif;
+
+$textColor: #484848;
+$white: #fff;
+$hover: #f1f1f1;
+$blue: #193E75;
+$darkblue: #062553;
+$borderColor: #E3E3E3;
+$shadow: 0 2px 2px 0 rgba(0,0,0,0.15);
+
+$fast: 0.2s;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: $font;
+	font-size: 13px;
+	color: $textColor;
+}
+
+.button-blue {
+	display: inline-block;
+	text-decoration: none;
+	border: none;
+	border-radius: 10px;
+	background-color: $blue;
+	color: $white;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 40px;
+	padding: 0 30px;
+	box-shadow: $shadow;
+	transition: $fast;
+	&:active { transform: scale(0.95); }
+}
+
+.box {
+	padding: 30px;
+	box-shadow: $shadow;
+	border-radius: 10px;
+	background-color: $white;
+	&:not(:last-child) { margin-bottom: 20px; }
+}
+
+.dataTables_wrapper {
+	width: 100%;
+	.dataTables_filter {
+		margin-bottom: 15px;
+		label {
+			font-size: 11px;
+			color: rgba(0,0,0,0.5);
+			input[type="search"] {
+				display: block;
+				margin-top: 5px;
+				appearance: none;
+				border: 1px solid $borderColor;
+				border-radius: 10px;
+				line-height: 38px;
+				height: 40px;
+				outline: none;
+				min-width: 300px;
+				padding: 0 10px;
+			}
+		}
+	}
+	.dataTable {
+		width: 100%;
+		overflow: auto;
+		border-collapse: collapse;
+		display: block;
+		thead tr {
+			background-color: #F7F7F7;
+			th {
+				font-size: 12px;
+				font-weight: 600;
+				color: $blue;
+				padding: 15px;
+				text-align: left;
+				outline: none;
+				cursor: pointer;
+				transition: $fast;
+				@media (hover : hover) {
+					&:hover { background-color: #eaeaea; }
+				}
+			}
+		}
+		tbody td {
+			font-size: 12px;
+			padding: 15px;
+			border-bottom: 1px solid $borderColor;
+			&.acciones {
+				button {
+					border: none;
+					appearance: none;
+					background-color: transparent;
+					display: inline-block;
+					width: 20px;
+					line-height: 20px;
+					cursor: pointer;
+					.fas {
+						color: rgba(0,0,0,0.3);
+						transition: $fast;
+					}
+					@media (hover : hover) {
+						&:hover .fas { color: $blue; }
+					}
+				}
+			}
+		}
+	}
+	.dataTables_info {
+		display: inline-block;
+		padding: 20px 15px 0 0;
+		line-height: 30px;
+		font-size: 11px;
+		color: rgba(0,0,0,0.25);
+	}
+	.dataTables_paginate {
+		float: left;
+		display: block;
+		padding: 20px 15px 0 0;
+		.paginate_button {
+			display: inline-block;
+			width: 30px;
+			line-height: 28px;
+			font-size: 10px;
+			font-weight: 600;
+			text-align: center;
+			border: 1px solid $borderColor;
+			border-radius: 5px;
+			margin-right: 5px;
+			cursor: pointer;
+			transition: $fast;
+			outline: none;
+			user-select: none;
+			i { vertical-align: middle; }
+			&:active { transform: scale(0.95); }
+			@media (hover : hover) {
+				&:hover { background-color: #F7F7F7; }
+			}
+			&.disabled {
+				pointer-events: none;
+				opacity: 0.3;
+			}
+			&.current {
+				background-color: $blue;
+				color: $white;
+				border-color: $blue;
+			}
+		}
+	}
+}
