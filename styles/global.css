@@ -20,8 +20,30 @@
   padding: 0 30px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
   transition: 0.2s;
+  cursor: pointer;
+  outline: none;
 }
 .button-blue:active {
+  transform: scale(0.95);
+}
+
+.button-white {
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+  color: #193E75;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 40px;
+  padding: 0 30px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+  transition: 0.2s;
+  cursor: pointer;
+  outline: none;
+}
+.button-white:active {
   transform: scale(0.95);
 }
 
@@ -70,7 +92,7 @@
   font-size: 12px;
   font-weight: 600;
   color: #193E75;
-  padding: 15px;
+  padding: 15px 20px;
   text-align: left;
   outline: none;
   cursor: pointer;
@@ -83,7 +105,7 @@
 }
 .dataTables_wrapper .dataTable tbody td {
   font-size: 12px;
-  padding: 15px;
+  padding: 15px 20px;
   border-bottom: 1px solid #E3E3E3;
 }
 .dataTables_wrapper .dataTable tbody td.acciones button {
@@ -94,10 +116,13 @@
   width: 20px;
   line-height: 20px;
   cursor: pointer;
+  outline: none;
 }
 .dataTables_wrapper .dataTable tbody td.acciones button .fas {
   color: rgba(0, 0, 0, 0.3);
-  transition: 0.2s;
+}
+.dataTables_wrapper .dataTable tbody td.acciones button:active .fas {
+  transform: scale(0.9);
 }
 @media (hover: hover) {
   .dataTables_wrapper .dataTable tbody td.acciones button:hover .fas {
@@ -150,6 +175,201 @@
   background-color: #193E75;
   color: #fff;
   border-color: #193E75;
+}
+
+.dropdown {
+  border: 1px solid #E3E3E3;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.dropdown > * {
+  pointer-events: none;
+}
+.dropdown.open .fas.icon-dropdown {
+  transform: rotate(-180deg);
+}
+.dropdown .placeholder {
+  color: #bdbdbd;
+  position: absolute;
+  left: 15px;
+  transition: 0.2s;
+  top: calc(50% - 8px);
+}
+.dropdown .fas {
+  width: 40px;
+  display: block;
+  text-align: center;
+  color: #bdbdbd;
+}
+.dropdown .fas.icon-dropdown {
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  right: 0;
+  transition: 0.2s;
+}
+.dropdown .fas.icon-dropdown:active {
+  transform: scale(0.9);
+}
+.dropdown input {
+  height: 50px;
+  outline: none;
+  appearance: none;
+  border: none;
+  width: calc(100% - 40px);
+  background: transparent;
+  padding: 15px 0 0 15px;
+  color: #484848;
+  font-weight: 600;
+  padding-top: 13px;
+}
+.dropdown.edited .placeholder {
+  top: 8px;
+  font-size: 10px;
+}
+.dropdown .droplist {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #E3E3E3;
+  list-style: none;
+  min-width: 200px;
+  padding: 5px 0;
+  top: 55px;
+  left: -1px;
+  display: none;
+  pointer-events: all;
+  z-index: 1;
+}
+.dropdown .droplist .dropitem {
+  line-height: 35px;
+  font-synthesis: 12px;
+  padding: 0 15px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .dropdown .droplist .dropitem:hover {
+    background-color: #f1f1f1;
+  }
+}
+
+.textarea {
+  border: 1px solid #E3E3E3;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+.textarea .placeholder {
+  color: #bdbdbd;
+  position: absolute;
+  left: 15px;
+  transition: 0.2s;
+  top: 16px;
+}
+.textarea .fas {
+  width: 40px;
+  display: block;
+  text-align: center;
+  color: #bdbdbd;
+}
+.textarea textarea {
+  height: 100px;
+  line-height: 18px;
+  width: 100%;
+  border: none;
+  appearance: none;
+  background: transparent;
+  resize: none;
+  padding: 22px 15px 15px 15px;
+  outline: none;
+  font-weight: 600;
+  color: #484848;
+}
+.textarea.focus {
+  border-color: #193E75;
+}
+.textarea.focus .placeholder {
+  top: 8px;
+  font-size: 10px;
+  color: #193E75;
+}
+.textarea.edited .placeholder {
+  top: 8px;
+  font-size: 10px;
+}
+
+.textfield {
+  border: 1px solid #E3E3E3;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+.textfield .placeholder {
+  color: #bdbdbd;
+  position: absolute;
+  left: 15px;
+  transition: 0.2s;
+  top: calc(50% - 8px);
+}
+.textfield .fas {
+  width: 40px;
+  display: block;
+  text-align: center;
+  color: #bdbdbd;
+}
+.textfield .fas.show-pwd {
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  right: 0;
+}
+.textfield .fas.show-pwd:active {
+  transform: scale(0.9);
+}
+.textfield input {
+  height: 50px;
+  outline: none;
+  appearance: none;
+  border: none;
+  width: calc(100% - 40px);
+  background: transparent;
+  padding: 15px 0 0 15px;
+  color: #484848;
+  font-weight: 600;
+  padding-top: 13px;
+}
+.textfield.focus {
+  border-color: #193E75;
+}
+.textfield.focus .placeholder {
+  top: 8px;
+  font-size: 10px;
+  color: #193E75;
+}
+.textfield.edited .placeholder {
+  top: 8px;
+  font-size: 10px;
 }
 
 /*# sourceMappingURL=global.css.map */

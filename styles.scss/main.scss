@@ -46,62 +46,17 @@ body { background-color: #F2F2F2; }
 				margin-bottom: 20px;
 			}
 			.textfield {
-				border: 1px solid rgba(255,255,255,0.25);
-				border-radius: 10px;
-				width: 100%;
-				display: block;
-				position: relative;
-				display: flex;
-				align-items: center;
-				transition: $fast;
+				border-color: rgba(255,255,255,0.3);
 				&:not(:last-child) { margin-bottom: 15px; }
-				.placeholder {
-					color: rgba(255,255,255,0.6);
-					position: absolute;
-					left: 40px;
-					transition: $fast;
-					top: calc(50% - 8px);
-				}
-				.fas {
-					width: 40px;
-					display: block;
-					text-align: center;
-					color: rgba(255,255,255,0.6);
-					&.show-pwd {
-						cursor: pointer;
-						position: absolute;
-						height: 100%;
-						display: flex;
-						flex-direction: column;
-						justify-content: center;
-						right: 0;
-						&:active { transform: scale(0.9); }
-					}
-				}
+				.placeholder { left: 40px; }
 				input {
-					height: 50px;
-					outline: none;
-					appearance: none;
-					border: none;
-					width: calc(100% - 40px);
-					background: transparent;
-					padding-right: 15px;
+					padding-left: 0;
 					color: $white;
-					font-weight: 600;
-					padding-top: 13px;
 				}
 				&.focus {
 					border-color: $white;
-					.placeholder {
-						top: 8px;
-						font-size: 10px;
-					}
-				}
-				&.edited {
-					.placeholder {
-						top: 8px;
-						font-size: 10px;
-					}
+					.fas { color: $white }
+					.placeholder { color: $white; }
 				}
 			}
 			.checkbox {
@@ -151,13 +106,17 @@ body { background-color: #F2F2F2; }
 }
 
 aside {
-	background-color: $blue;
-	width: 250px;
-	min-height: calc(100vh - 20px);
-	margin: 10px 0 10px 10px;
-	border-radius: 10px;
-	padding: 10px 0;
-	box-shadow: $shadow;
+	width: 270px;
+	.container-aside {
+		background-color: $blue;
+		height: calc(100vh - 20px);
+		margin: 10px 0 10px 10px;
+		border-radius: 10px;
+		padding: 10px 0;
+		box-shadow: $shadow;
+		position: fixed;
+		width: 250px;
+	}
 	img {
 		margin: auto;
 		display: block;
@@ -180,6 +139,7 @@ aside {
 	}
 	.modulos {
 		list-style: none;
+		overflow: auto;
 		.menu-item {
 			a {
 				color: rgba(255,255,255,0.6);
@@ -259,6 +219,7 @@ body:not(#login-page) {
 	main {
 		padding: 10px 40px;
 		width: calc(100% - 250px);
+		.content { padding: 20px 0 70px 0; }
 	}
 }
 
@@ -302,15 +263,8 @@ body:not(#login-page) {
 	}
 }
 
-#usuarios-page {
-	.content {
-		padding-top: 10px;
-	}
-}
-
 #base-datos-page {
 	.content {
-		padding: 20px 0;
 		.modules {
 			.tabs {
 				display: inline-flex;
@@ -354,10 +308,36 @@ body:not(#login-page) {
 				position: relative;
 				.tab-content {
 					display: none;
+					.download {
+						position: absolute;
+						right: 30px;
+						top: 51px;
+					}
 					&.tab-content-active {
 						display: block;
 					}
 				}
+			}
+		}
+		form {
+			display: none;
+			margin-top: 20px;
+			h2 {
+				margin-bottom: 20px;
+				font-size: 16px;
+				font-weight: 600;
+			}
+			.row {
+				display: flex;
+				&:not(:last-child) { margin-bottom: 20px; }
+				label {
+					width: calc(50% - 15px);
+					&:first-child { margin-right: 30px; }
+				}
+			}
+			.row-button {
+				margin-top: 30px;
+				.button-blue { margin-right: 5px; }
 			}
 		}
 	}

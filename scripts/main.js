@@ -12,11 +12,14 @@ window.onload = async () => {
 	focusInput()
 	changeCheckbox()
 	showPassword()
+	cancelEditForm()
+	dropdown()
 	
 	switch(currentPage) {
 		case 'dashboard-page' : setMenuActive('.menu-dashboard'); break;
 		case 'usuarios-page' : setMenuActive('.menu-usuarios'); break;
 		case 'base-datos-page' : setMenuActive('.menu-base'); break;
+		case 'alertas-page' : setMenuActive('.menu-alertas'); break;
 		default : setMenuActive('.menu-dashboard');
 	}
 	
@@ -94,5 +97,77 @@ let showPassword = () => {
 }
 
 let setMenuActive = (menuSelector) => {
-	$(menuSelector).addClass('active').siblings('.menu-item').removeClass('active');
+	$(menuSelector).addClass('active').siblings('.menu-item').removeClass('active')
+}
+
+let tableDisplay = (tableSelector) => {
+	const sizeContainer = $(tableSelector).closest('.box').innerWidth() - 60
+	const sizeTable = $(tableSelector).find('thead').innerWidth()
+	if(sizeTable < sizeContainer) {
+		$(tableSelector).css({display: 'inline-table'})
+	}
+}
+
+let getRowData = (e, table) => {
+	let trRow = $(e).closest('tr')
+	let row = table.row(trRow).data()
+
+	const form = $(e).closest('table').attr('id').split('-table')[0]
+	$(`#form-${form}`).slideDown('fast', () => {
+		const scrollTop = $(`#form-${form}`).offset().top
+		$('html,body').animate({scrollTop: scrollTop - 20}, 'fast')
+	})
+
+	return row
+}
+
+let editedTextfield = (formSelector) => {
+	const fields = $(formSelector).find('input:text, input:password, textarea')
+	$.each(fields, (index, value) => {
+		const content = $(value).val()
+		if(content != '') {
+			$(value).closest('label').addClass('edited')
+		}
+	})
+}
+
+let cancelEditForm = () => {
+	$('body').on('click', '.cancel-form', e => {
+		const t = $(e.target)
+		t.closest('form').slideUp('fast')
+	})
+}
+
+let dropdown = () => {
+	let open = false
+	$('.dropdown input:text').click(e => {
+		const t = $(e.target);
+		const container = t.closest('.dropdown')
+		const droplist = container.find('.droplist')
+
+		if (!open) {
+			container.addClass('open');
+			droplist.show('fast');
+			open = true;
+		}
+		else {
+			droplist.hide('fast');
+			container.removeClass('open');
+			open = false;
+		}
+	});
+
+	$('.dropdown .dropitem').click(e => {
+		const t = $(e.target)
+		const value = t.attr('data-value')
+		const text = t.text()
+		const input = t.closest('.dropdown').find('input:text')
+		const inputHidden = t.closest('.dropdown').find('input:hidden')
+
+		input.val(text)
+		inputHidden.val(value)
+
+		t.closest('.dropdown').removeClass('open')
+
+	})
 }

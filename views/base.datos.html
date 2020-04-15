@@ -45,6 +45,7 @@
 				</div>
 				<div class="box">
 					<div class="tab-content tab-content-active" data-content="empresas">
+						<button type="button" class="button-blue download">Descargar</button>
 						<table id="empresas-table">
 							<thead><tr>
 								<th>ID</th>
@@ -58,6 +59,7 @@
 						</table>
 					</div>
 					<div class="tab-content" data-content="agencias">
+						<button type="button" class="button-blue download">Descargar</button>
 						<table id="agencias-table">
 							<thead><tr>
 								<th>ID</th>
@@ -78,6 +80,7 @@
 						</table>
 					</div>
 					<div class="tab-content" data-content="rutas">
+						<button type="button" class="button-blue download">Descargar</button>
 						<table id="rutas-table">
 							<thead><tr>
 								<th>ID</th>
@@ -94,6 +97,169 @@
 					</div>
 				</div>
 			</div>
+
+			<form id="form-empresas" class="box">
+				<h2>Editar informaci&oacute;n de Empresas de transporte</h2>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">ID</span>
+						<input type="text" id="empresas-id">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">RUC</span>
+						<input type="text" id="empresas-ruc">
+					</label>
+				</div>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">Raz&oacute;n Social</span>
+						<input type="text" id="empresas-razon">
+						<input type="hidden">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Nombre comercial</span>
+						<input type="text" id="empresas-nombre">
+					</label>
+				</div>
+				<div class="row">
+					<label class="dropdown">
+						<span class="placeholder">Estado</span>
+						<input type="text" id="empresas-estado" readonly>
+						<ul class="droplist">
+							<li class="dropitem" data-value="1">Activo</li>
+							<li class="dropitem" data-value="0">Inactivo</li>
+						</ul>
+						<i class="fas fa-angle-down icon-dropdown" aria-hidden="true"></i>
+					</label>
+				</div>
+				<div class="row-button">
+					<button type="button" class="button-blue">Guardar</button>
+					<button type="button" class="button-white cancel-form">Cancelar</button>
+				</div>
+			</form>
+
+			<form id="form-agencias" class="box">
+				<h2>Editar informaci&oacute;n de Agencias</h2>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">ID</span>
+						<input type="text" id="agencias-id">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">RUC</span>
+						<input type="text" id="agencias-ruc">
+					</label>
+				</div>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">Empresa</span>
+						<input type="text" id="agencias-empresa">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Correo electr&oacute;nico</span>
+						<input type="text" id="agencias-email">
+					</label>
+				</div>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">Tel&eacute;fono</span>
+						<input type="text" id="agencias-telefono">
+					</label>
+					<label class="dropdown">
+						<span class="placeholder">Tipo</span>
+						<input type="text" id="agencias-tipo" readonly>
+						<ul class="droplist">
+							<li class="dropitem" data-value="terminal">Terminal</li>
+							<li class="dropitem" data-value="agencia">Agencia</li>
+						</ul>
+						<i class="fas fa-angle-down icon-dropdown" aria-hidden="true"></i>
+					</label>
+				</div>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">Direcci&oacute;n</span>
+						<input type="text" id="agencias-direccion">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Departamento</span>
+						<input type="text" id="agencias-departamento">
+					</label>
+				</div>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">Provincia</span>
+						<input type="text" id="agencias-provincia">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Distrito</span>
+						<input type="text" id="agencias-distrito">
+					</label>
+				</div>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">Latitud</span>
+						<input type="text" id="agencias-latitud">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Longitud</span>
+						<input type="text" id="agencias-longitud">
+					</label>
+				</div>
+				<div class="row-button">
+					<button type="button" class="button-blue">Guardar</button>
+					<button type="button" class="button-white cancel-form">Cancelar</button>
+				</div>
+			</form>
+
+			<form id="form-rutas" class="box">
+				<h2>Editar informaci&oacute;n de Rutas</h2>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">ID</span>
+						<input type="text" id="rutas-id">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Empresa</span>
+						<input type="text" id="rutas-empresa">
+					</label>
+				</div>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">Inicio</span>
+						<input type="text" id="rutas-inicio">
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Fin</span>
+						<input type="text" id="rutas-fin">
+					</label>
+				</div>
+				<div class="row">
+					<label class="dropdown">
+						<span class="placeholder">Estado</span>
+						<input type="text" id="rutas-estado" readonly>
+						<ul class="droplist">
+							<li class="dropitem" data-value="1">Activo</li>
+							<li class="dropitem" data-value="0">Inactivo</li>
+						</ul>
+						<i class="fas fa-angle-down icon-dropdown" aria-hidden="true"></i>
+					</label>
+					<label class="textfield">
+						<span class="placeholder">RUC</span>
+						<input type="text" id="rutas-ruc">
+					</label>
+				</div>
+				<div class="row">
+					<label class="textarea">
+						<span class="placeholder">Descripci&oacute;n</span>
+						<textarea id="rutas-descripcion"></textarea>
+					</label>
+				</div>
+				<div class="row-button">
+					<button type="button" class="button-blue">Guardar</button>
+					<button type="button" class="button-white cancel-form">Cancelar</button>
+				</div>
+			</form>
+			
 		</div>
 		
 	</main>
@@ -115,7 +281,11 @@
 			$('.tab-content-active').slideUp('fast', () => {
 				$(`.tab-content[data-content="${content}"]`).slideDown('fast')
 			})
+
+			tableDisplay(`#${content}-table`)
 		}
+
+		$('form').slideUp('fast')
 	})
 	
 	const testEmpresas = [{
@@ -251,7 +421,7 @@
 				<td>${emp.nombreComercial}</td>
 				<td>${emp.estado}</td>
 				<td class="acciones">
-					<button class="edit"><i class="fas fa-pen" aria-hidden="true"></i></button>
+					<button class="edit" onclick="editEmpresasData(this)"><i class="fas fa-pen" aria-hidden="true"></i></button>
 					<button class="delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
 				</td>
 			</tr>
@@ -540,7 +710,7 @@
 				<td>${agencia.latitud}</td>
 				<td>${agencia.longitud}</td>
 				<td class="acciones">
-					<button class="edit"><i class="fas fa-pen" aria-hidden="true"></i></button>
+					<button class="edit" onclick="editAgenciasData(this)"><i class="fas fa-pen" aria-hidden="true"></i></button>
 					<button class="delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
 				</td>
 			</tr>
@@ -724,7 +894,7 @@
 				<td>${ruta.ruc}</td>
 				<td>${ruta.estado}</td>
 				<td class="acciones">
-					<button class="edit"><i class="fas fa-pen" aria-hidden="true"></i></button>
+					<button class="edit" onclick="editRutasData(this)"><i class="fas fa-pen" aria-hidden="true"></i></button>
 					<button class="delete"><i class="fas fa-trash" aria-hidden="true"></i></button>
 				</td>
 			</tr>
@@ -733,7 +903,7 @@
 		tableRutas.append(html)
 	})
 
-	$('table').DataTable({
+		let optionsTable = {
 			pageLength: 5,
 			lengthChange: false,
 			language: {
@@ -745,8 +915,58 @@
 					next: '<i class="fas fa-angle-right" aria-hidden="true"></i>'
 				}
 			}
-		})
+		}
+
+		let empresasTable = $('#empresas-table').DataTable(optionsTable)
+		let agenciasTable = $('#agencias-table').DataTable(optionsTable)
+		let rutasTable = $('#rutas-table').DataTable(optionsTable)
+
+		tableDisplay('#empresas-table')
+
+		let editEmpresasData = (e) => {
+			const row = getRowData(e, empresasTable)
+			$('#form-empresas').find('#empresas-id').val(row[0])
+			$('#form-empresas').find('#empresas-ruc').val(row[1])
+			$('#form-empresas').find('#empresas-razon').val(row[2])
+			$('#form-empresas').find('#empresas-nombre').val(row[3])
+			$('#form-empresas').find('#empresas-estado').val(row[4])
+
+			editedTextfield('#form-empresas')
+		}
+
+		let editAgenciasData = (e) => {
+			const row = getRowData(e, agenciasTable)
+			$('#form-agencias').find('#agencias-id').val(row[0])
+			$('#form-agencias').find('#agencias-ruc').val(row[1])
+			$('#form-agencias').find('#agencias-empresa').val(row[2])
+			$('#form-agencias').find('#agencias-email').val(row[3])
+			$('#form-agencias').find('#agencias-telefono').val(row[4])
+			$('#form-agencias').find('#agencias-tipo').val(row[5])
+			$('#form-agencias').find('#agencias-direccion').val(row[6])
+			$('#form-agencias').find('#agencias-departamento').val(row[7])
+			$('#form-agencias').find('#agencias-provincia').val(row[8])
+			$('#form-agencias').find('#agencias-distrito').val(row[9])
+			$('#form-agencias').find('#agencias-latitud').val(row[10])
+			$('#form-agencias').find('#agencias-longitud').val(row[11])
+
+			editedTextfield('#form-agencias')
+		}
+
+		let editRutasData = (e) => {
+			const row = getRowData(e, rutasTable)
+			$('#form-rutas').find('#rutas-id').val(row[0])
+			$('#form-rutas').find('#rutas-empresa').val(row[1])
+			$('#form-rutas').find('#rutas-inicio').val(row[2])
+			$('#form-rutas').find('#rutas-fin').val(row[3])
+			$('#form-rutas').find('#rutas-descripcion').val(row[4])
+			$('#form-rutas').find('#rutas-ruc').val(row[5])
+			$('#form-rutas').find('#rutas-estado').val(row[6])
+
+			editedTextfield('#form-rutas')
+		}
+		
 	</script>
+
 	
 </body>
 </html>
