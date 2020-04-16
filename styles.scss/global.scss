@@ -373,7 +373,7 @@ $fast: 0.2s;
 	}
 }
 
-form {
+form:not(#form-login) {
 	display: none;
 	margin-top: 20px;
 	h2 {

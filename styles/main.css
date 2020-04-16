@@ -379,32 +379,32 @@
   font-size: 10px;
 }
 
-form {
+form:not(#form-login) {
   display: none;
   margin-top: 20px;
 }
-form h2 {
+form:not(#form-login) h2 {
   margin-bottom: 20px;
   font-size: 14px;
   font-weight: 700;
 }
-form .row {
+form:not(#form-login) .row {
   display: flex;
   align-items: flex-start;
 }
-form .row:not(:last-child) {
+form:not(#form-login) .row:not(:last-child) {
   margin-bottom: 20px;
 }
-form .row label {
+form:not(#form-login) .row label {
   width: calc(50% - 15px);
 }
-form .row label:first-child {
+form:not(#form-login) .row label:first-child {
   margin-right: 30px;
 }
-form .row-button {
+form:not(#form-login) .row-button {
   margin-top: 30px;
 }
-form .row-button .button-blue {
+form:not(#form-login) .row-button .button-blue {
   margin-right: 5px;
 }
 
