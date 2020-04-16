@@ -28,12 +28,213 @@
 					<a class="button-blue" href="javascript:void(0)">Descargar</a>
 				</div>
 			</div>
+
+			<div class="box table">
+				<table id="alertas-table">
+					<thead><tr>
+						<th>ID</th>
+						<th>Tipo de alerta</th>
+						<th>Dispositivo</th>
+						<th>Fecha</th>
+						<th>Latitud</th>
+						<th>Longitud</th>
+						<th>Ver detalle</th>
+					</tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<div class="box alert-detail">
+				<h2>Detalle de alerta</h2>
+			</div>
 		</div>
 		
 	</main>
 
 	<script type="text/javascript" src="../scripts/jquery.js"></script>
+	<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="../scripts/main.js"></script>
+	<script type="text/javascript">
+		
+		const testAlertas = [{
+			"id": 1,
+			"tipo": "Accidente",
+			"dispositivo": "Android",
+			"fecha": "27/05/2019",
+			"latitud": 53.5484541,
+			"longitud": 18.9455238
+		}, {
+			"id": 2,
+			"tipo": "Accidente",
+			"dispositivo": "Android",
+			"fecha": "17/01/2020",
+			"latitud": -7.6323091,
+			"longitud": 110.4560006
+		}, {
+			"id": 3,
+			"tipo": "Robo",
+			"dispositivo": "Android",
+			"fecha": "04/03/2020",
+			"latitud": 53.0329376,
+			"longitud": 23.6062185
+		}, {
+			"id": 4,
+			"tipo": "Robo",
+			"dispositivo": "Android",
+			"fecha": "02/08/2019",
+			"latitud": -7.6142101,
+			"longitud": 110.692877
+		}, {
+			"id": 5,
+			"tipo": "Robo",
+			"dispositivo": "iOS",
+			"fecha": "17/05/2019",
+			"latitud": -7.2536471,
+			"longitud": 107.8954131
+		}, {
+			"id": 6,
+			"tipo": "Demora",
+			"dispositivo": "iOS",
+			"fecha": "03/09/2019",
+			"latitud": -16.3952829,
+			"longitud": -71.5367908
+		}, {
+			"id": 7,
+			"tipo": "Accidente",
+			"dispositivo": "Android",
+			"fecha": "13/08/2019",
+			"latitud": 40.0072152,
+			"longitud": 44.4880651
+		}, {
+			"id": 8,
+			"tipo": "Demora",
+			"dispositivo": "Android",
+			"fecha": "02/12/2019",
+			"latitud": 35.6196262,
+			"longitud": -5.2841177
+		}, {
+			"id": 9,
+			"tipo": "Demora",
+			"dispositivo": "iOS",
+			"fecha": "22/10/2019",
+			"latitud": 17.3378289,
+			"longitud": 121.759491
+		}, {
+			"id": 10,
+			"tipo": "Robo",
+			"dispositivo": "Android",
+			"fecha": "15/10/2019",
+			"latitud": -22.7645391,
+			"longitud": -43.3996264
+		}, {
+			"id": 11,
+			"tipo": "Demora",
+			"dispositivo": "iOS",
+			"fecha": "14/03/2020",
+			"latitud": 39.9999288,
+			"longitud": 44.5583013
+		}, {
+			"id": 12,
+			"tipo": "Robo",
+			"dispositivo": "iOS",
+			"fecha": "09/03/2020",
+			"latitud": 41.3281534,
+			"longitud": -8.1222717
+		}, {
+			"id": 13,
+			"tipo": "Robo",
+			"dispositivo": "Android",
+			"fecha": "10/05/2019",
+			"latitud": "52.9978",
+			"longitud": "78.6449"
+		}, {
+			"id": 14,
+			"tipo": "Accidente",
+			"dispositivo": "Android",
+			"fecha": "14/03/2020",
+			"latitud": 23.791187,
+			"longitud": 112.299103
+		}, {
+			"id": 15,
+			"tipo": "Demora",
+			"dispositivo": "iOS",
+			"fecha": "13/11/2019",
+			"latitud": "41.56055",
+			"longitud": "61.0018"
+		}, {
+			"id": 16,
+			"tipo": "Demora",
+			"dispositivo": "iOS",
+			"fecha": "23/02/2020",
+			"latitud": 22.843818,
+			"longitud": 114.164223
+		}, {
+			"id": 17,
+			"tipo": "Demora",
+			"dispositivo": "Android",
+			"fecha": "05/10/2019",
+			"latitud": 11.4720137,
+			"longitud": 49.8739267
+		}, {
+			"id": 18,
+			"tipo": "Accidente",
+			"dispositivo": "iOS",
+			"fecha": "13/06/2019",
+			"latitud": 26.709056,
+			"longitud": 113.269441
+		}, {
+			"id": 19,
+			"tipo": "Robo",
+			"dispositivo": "iOS",
+			"fecha": "13/08/2019",
+			"latitud": 25.6765837,
+			"longitud": -100.2602364
+		}, {
+			"id": 20,
+			"tipo": "Robo",
+			"dispositivo": "iOS",
+			"fecha": "23/03/2020",
+			"latitud": 14.6274805,
+			"longitud": 120.9679677
+		}]
+
+		const table = $('#alertas-table tbody')
+		table.empty()
+		testAlertas.forEach(alerta => {
+			const html = `
+				<tr>
+					<td>${alerta.id}</td>
+					<td>${alerta.tipo}</td>
+					<td>${alerta.dispositivo}</td>
+					<td>${alerta.fecha}</td>
+					<td>${alerta.latitud}</td>
+					<td>${alerta.longitud}</td>
+					<td class="acciones">
+						<button class="view" onclick="viewDetail(this)"><i class="fas fa-eye" aria-hidden="true"></i></button>
+					</td>
+				</tr>
+			`
+
+			table.append(html)
+		})
+
+		$('#alertas-table').DataTable({
+			pageLength: 5,
+			lengthChange: false,
+			info: false,
+			language: {
+				search: 'Buscar alerta',
+				infoEmpty: 'No hay usuarios registrados',
+				paginate: {
+					previous: '<i class="fas fa-angle-left" aria-hidden="true"></i>',
+					next: '<i class="fas fa-angle-right" aria-hidden="true"></i>'
+				}
+			}
+		})
+
+		tableDisplay('#alertas-table')
+		
+	</script>
 	
 </body>
 </html>

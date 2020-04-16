@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>ViajeSeguro</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../styles/main.css">
+	<script src="https://kit.fontawesome.com/b7219096b7.js" crossorigin="anonymous"></script>
+</head>
+<body id="messages-page">
+	
+	<aside></aside>
+
+	<main>
+
+		<header></header>
+
+		<div class="content">
+			<div class="box description">
+				<a class="back" href="javascript:history.back()"><i class="fas fa-arrow-left" aria-hidden="true"></i>Volver</a>
+				<div>
+					<div>
+						<h1>Bandeja de entrada</h1>
+						<p>Visualiza, gestiona o responde los mensajes generados en la aplicaci&oacute;n ViajeSeguro.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="box table">
+				<table id="messages-table">
+					<thead><tr>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Correo electr&oacute;nico</th>
+						<th>Mensaje</th>
+						<th>Fecha</th>
+						<th>Ver detalle</th>
+					</tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<form id="form-messages" class="box message-detail">
+				<h2>Detalle de mensaje</h2>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">ID</span>
+						<input type="text" id="messages-id" readonly>
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Nombre</span>
+						<input type="text" id="messages-nombre" readonly>
+					</label>
+				</div>
+				<div class="row">
+					<label class="textfield">
+						<span class="placeholder">Apellidos</span>
+						<input type="text" id="messages-apellidos" readonly>
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Correo electr&oacute;nico</span>
+						<input type="text" id="messages-email" readonly>
+					</label>
+				</div>
+				<div class="row">
+					<label class="textarea">
+						<span class="placeholder">Mensaje</span>
+						<textarea id="messages-mensaje" readonly></textarea>
+					</label>
+					<label class="textfield">
+						<span class="placeholder">Fecha</span>
+						<input type="text" id="messages-fecha" readonly>
+					</label>
+				</div>
+				<div class="reply">
+					<h3>Responder el mensaje</h3>
+					<div class="row">
+						<label class="textarea">
+							<span class="placeholder">Mensaje</span>
+							<textarea id="messages-reply"></textarea>
+						</label>
+					</div>
+					<div class="row-button">
+						<button type="button" class="button-blue">Enviar</button>
+						<button type="button" class="button-white cancel-form">Cancelar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+	</main>
+
+	<script type="text/javascript" src="../scripts/jquery.js"></script>
+	<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../scripts/main.js"></script>
+	<script type="text/javascript">
+		
+		const testMessages = [{
+			"id": 1,
+			"nombre": "Dan",
+			"apellidos": "Stairmand",
+			"correoElectronico": "dstairmand0@imageshack.us",
+			"mensaje": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
+			"fecha": "08/07/2019"
+		}, {
+			"id": 2,
+			"nombre": "Staffard",
+			"apellidos": "de Glanville",
+			"correoElectronico": "sdeglanville1@buzzfeed.com",
+			"mensaje": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.",
+			"fecha": "08/05/2019"
+		}, {
+			"id": 3,
+			"nombre": "Pamella",
+			"apellidos": "Stoakes",
+			"correoElectronico": "pstoakes2@qq.com",
+			"mensaje": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+			"fecha": "11/05/2019"
+		}, {
+			"id": 4,
+			"nombre": "Bren",
+			"apellidos": "Yacob",
+			"correoElectronico": "byacob3@squidoo.com",
+			"mensaje": "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",
+			"fecha": "22/05/2019"
+		}, {
+			"id": 5,
+			"nombre": "Annadiana",
+			"apellidos": "Fishlee",
+			"correoElectronico": "afishlee4@chicagotribune.com",
+			"mensaje": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+			"fecha": "20/07/2019"
+		}, {
+			"id": 6,
+			"nombre": "Saree",
+			"apellidos": "Laviste",
+			"correoElectronico": "slaviste5@123-reg.co.uk",
+			"mensaje": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+			"fecha": "09/10/2019"
+		}, {
+			"id": 7,
+			"nombre": "Bronny",
+			"apellidos": "Ruhben",
+			"correoElectronico": "bruhben6@globo.com",
+			"mensaje": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.",
+			"fecha": "10/05/2019"
+		}, {
+			"id": 8,
+			"nombre": "Justus",
+			"apellidos": "Hackly",
+			"correoElectronico": "jhackly7@google.com.br",
+			"mensaje": "In congue. Etiam justo. Etiam pretium iaculis justo.",
+			"fecha": "19/06/2019"
+		}, {
+			"id": 9,
+			"nombre": "Rosie",
+			"apellidos": "Grolmann",
+			"correoElectronico": "rgrolmann8@photobucket.com",
+			"mensaje": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
+			"fecha": "26/06/2019"
+		}, {
+			"id": 10,
+			"nombre": "Augustina",
+			"apellidos": "Easseby",
+			"correoElectronico": "aeasseby9@t.co",
+			"mensaje": "Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
+			"fecha": "06/02/2020"
+		}, {
+			"id": 11,
+			"nombre": "Charla",
+			"apellidos": "Levi",
+			"correoElectronico": "clevia@xing.com",
+			"mensaje": "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+			"fecha": "14/02/2020"
+		}, {
+			"id": 12,
+			"nombre": "Woody",
+			"apellidos": "Ratledge",
+			"correoElectronico": "wratledgeb@wikia.com",
+			"mensaje": "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
+			"fecha": "07/02/2020"
+		}, {
+			"id": 13,
+			"nombre": "Arri",
+			"apellidos": "Seamans",
+			"correoElectronico": "aseamansc@ftc.gov",
+			"mensaje": "Fusce consequat. Nulla nisl. Nunc nisl.",
+			"fecha": "13/05/2019"
+		}, {
+			"id": 14,
+			"nombre": "Barbra",
+			"apellidos": "Deeks",
+			"correoElectronico": "bdeeksd@elpais.com",
+			"mensaje": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
+			"fecha": "26/04/2019"
+		}, {
+			"id": 15,
+			"nombre": "Damian",
+			"apellidos": "Spadazzi",
+			"correoElectronico": "dspadazzie@army.mil",
+			"mensaje": "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
+			"fecha": "22/03/2020"
+		}, {
+			"id": 16,
+			"nombre": "Dena",
+			"apellidos": "McCarly",
+			"correoElectronico": "dmccarlyf@cbc.ca",
+			"mensaje": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
+			"fecha": "26/01/2020"
+		}, {
+			"id": 17,
+			"nombre": "Davis",
+			"apellidos": "Wysome",
+			"correoElectronico": "dwysomeg@etsy.com",
+			"mensaje": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+			"fecha": "15/09/2019"
+		}, {
+			"id": 18,
+			"nombre": "Roosevelt",
+			"apellidos": "Wimpey",
+			"correoElectronico": "rwimpeyh@photobucket.com",
+			"mensaje": "Phasellus in felis. Donec semper sapien a libero. Nam dui.",
+			"fecha": "13/06/2019"
+		}, {
+			"id": 19,
+			"nombre": "Sara-ann",
+			"apellidos": "Ifill",
+			"correoElectronico": "sifilli@i2i.jp",
+			"mensaje": "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+			"fecha": "26/12/2019"
+		}, {
+			"id": 20,
+			"nombre": "Juanita",
+			"apellidos": "Palke",
+			"correoElectronico": "jpalkej@imdb.com",
+			"mensaje": "Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.",
+			"fecha": "24/07/2019"
+		}]
+
+		const table = $('#messages-table tbody')
+		table.empty()
+		testMessages.forEach(message => {
+			const html = `
+				<tr>
+					<td>${message.id}</td>
+					<td>${message.nombre}</td>
+					<td>${message.apellidos}</td>
+					<td>${message.correoElectronico}</td>
+					<td>${message.mensaje}</td>
+					<td>${message.fecha}</td>
+					<td class="acciones">
+						<button class="view" onclick="viewMessage(this)"><i class="fas fa-eye" aria-hidden="true"></i></button>
+					</td>
+				</tr>
+			`
+
+			table.append(html)
+		})
+
+		const messageTable = $('#messages-table').DataTable({
+			pageLength: 5,
+			lengthChange: false,
+			info: false,
+			language: {
+				search: 'Buscar mensaje',
+				infoEmpty: 'No hay mensajes registrados',
+				paginate: {
+					previous: '<i class="fas fa-angle-left" aria-hidden="true"></i>',
+					next: '<i class="fas fa-angle-right" aria-hidden="true"></i>'
+				}
+			}
+		})
+
+		tableDisplay('#messages-table')
+
+		let viewMessage = (e) => {
+			const row = getRowData(e, messageTable)
+			$('#form-messages').find('#messages-id').val(row[0])
+			$('#form-messages').find('#messages-nombre').val(row[1])
+			$('#form-messages').find('#messages-apellidos').val(row[2])
+			$('#form-messages').find('#messages-email').val(row[3])
+			$('#form-messages').find('#messages-mensaje').val(row[4])
+			$('#form-messages').find('#messages-fecha').val(row[5])
+
+			editedTextfield('#form-messages')
+		}
+		
+	</script>
+	
+</body>
+</html>
