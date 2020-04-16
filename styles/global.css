@@ -137,7 +137,6 @@
   color: rgba(0, 0, 0, 0.25);
 }
 .dataTables_wrapper .dataTables_paginate {
-  float: left;
   display: block;
   padding: 20px 15px 0 0;
 }
@@ -299,6 +298,10 @@
   font-weight: 600;
   color: #484848;
 }
+.textarea textarea:read-only {
+  opacity: 0.7;
+  pointer-events: none;
+}
 .textarea.focus {
   border-color: #193E75;
 }
@@ -359,6 +362,10 @@
   font-weight: 600;
   padding-top: 13px;
 }
+.textfield input:read-only {
+  opacity: 0.7;
+  pointer-events: none;
+}
 .textfield.focus {
   border-color: #193E75;
 }
@@ -370,6 +377,35 @@
 .textfield.edited .placeholder {
   top: 8px;
   font-size: 10px;
+}
+
+form {
+  display: none;
+  margin-top: 20px;
+}
+form h2 {
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 700;
+}
+form .row {
+  display: flex;
+  align-items: flex-start;
+}
+form .row:not(:last-child) {
+  margin-bottom: 20px;
+}
+form .row label {
+  width: calc(50% - 15px);
+}
+form .row label:first-child {
+  margin-right: 30px;
+}
+form .row-button {
+  margin-top: 30px;
+}
+form .row-button .button-blue {
+  margin-right: 5px;
 }
 
 /*# sourceMappingURL=global.css.map */

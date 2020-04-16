@@ -20,6 +20,7 @@ window.onload = async () => {
 		case 'usuarios-page' : setMenuActive('.menu-usuarios'); break;
 		case 'base-datos-page' : setMenuActive('.menu-base'); break;
 		case 'alertas-page' : setMenuActive('.menu-alertas'); break;
+		case 'messages-page' : setMenuActive('.menu-messages'); break;
 		default : setMenuActive('.menu-dashboard');
 	}
 	
@@ -34,7 +35,7 @@ let getContentHtml = async (html) => {
 
 let focusInput = () => {
 
-	$('input:text, input:password').on('input', e => {
+	$('input:text:not([readonly]), input:password').on('input', e => {
 		const t = $(e.target)
 		const container = t.closest('label')
 
@@ -42,7 +43,7 @@ let focusInput = () => {
 		else { container.addClass('edited') }
 	})
 
-	$('input:text, input:password').focusin(e => {
+	$('input:text:not([readonly]), input:password').focusin(e => {
 		const t = $(e.target)
 		const container = t.closest('label')
 		
