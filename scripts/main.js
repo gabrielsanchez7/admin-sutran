@@ -178,13 +178,13 @@ let launchMap = (data, selected) => {
 	var map = L.map( 'map', {
 		center: [selected.latitud, selected.longitud],
 		minZoom: 2,
-		zoom: 30
+		zoom: 15
 	});
 
 	
 	L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		//  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-		//  subdomains: ['a','b','c']
+		 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		 subdomains: ['a','b','c']
 	}).addTo( map );
 	
 	// var myURL = jQuery( 'script[src$="leaf-demo.js"]' ).attr( 'src' ).replace( 'leaf-demo.js', '' );
@@ -199,10 +199,6 @@ let launchMap = (data, selected) => {
 
 	var markerClusters = L.markerClusterGroup();
 	
-	var popup = htmlPopup(selected)
-	var m = L.marker( [selected.latitud, selected.longitud], {icon: myIcon} ).bindPopup( popup );
-	markerClusters.addLayer( m );
-	
 	data.forEach(alerta => {
 		var popup = htmlPopup(alerta)
 		
@@ -211,6 +207,15 @@ let launchMap = (data, selected) => {
 	})
 	
 	map.addLayer( markerClusters );
+
+	setTimeout(() => {
+		map.invalidateSize()
+		var popLocation= new L.LatLng(selected.latitud,selected.longitud);
+		L.popup()
+			.setLatLng(popLocation)
+			.setContent(htmlPopup(selected))
+			.openOn(map);
+	}, 100);
 }
 
 let htmlPopup = (selected) => {
