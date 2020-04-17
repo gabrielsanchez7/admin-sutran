@@ -6,6 +6,9 @@
 	<title>ViajeSeguro</title>
 
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
 	<link rel="stylesheet" href="../styles/main.css">
 	<script src="https://kit.fontawesome.com/b7219096b7.js" crossorigin="anonymous"></script>
 </head>
@@ -44,8 +47,14 @@
 				</table>
 			</div>
 
-			<div class="box alert-detail">
+			<div class="box alert-detail form">
 				<h2>Detalle de alerta</h2>
+				<div class="map-container">
+					<div id="map"></div>
+				</div>
+				<div class="row-button">
+					<button type="button" class="button-white" onclick="closeMap()">Cancelar</button>
+				</div>
 			</div>
 		</div>
 		
@@ -53,6 +62,8 @@
 
 	<script type="text/javascript" src="../scripts/jquery.js"></script>
 	<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script>
+	<script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js'></script>
 	<script type="text/javascript" src="../scripts/main.js"></script>
 	<script type="text/javascript">
 		
@@ -218,7 +229,7 @@
 			table.append(html)
 		})
 
-		$('#alertas-table').DataTable({
+		const alertasTable = $('#alertas-table').DataTable({
 			pageLength: 5,
 			lengthChange: false,
 			info: false,
@@ -233,6 +244,30 @@
 		})
 
 		tableDisplay('#alertas-table')
+
+		let viewDetail = (e) => {
+
+			closeMap()
+
+			setTimeout(() => {
+				const row = getRowData(e, alertasTable)
+				const selected = testAlertas.find(a => { return a.id == row[0] })
+				launchMap(testAlertas, selected)
+	
+				$('.alert-detail').slideDown('fast', () => {
+					const scrollTop = $('.alert-detail').offset().top
+					$('html,body').animate({scrollTop: scrollTop - 20}, 'fast')
+				})
+			}, 300)
+			
+		}
+
+		let closeMap = () => {
+			$('.alert-detail').slideUp('fast', () => {
+				$('#map').remove()
+				$('.map-container').html('<div id="map"></div>')
+			})
+		}
 		
 	</script>
 	

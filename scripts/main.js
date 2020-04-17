@@ -172,3 +172,53 @@ let dropdown = () => {
 
 	})
 }
+
+let launchMap = (data, selected) => {
+	// Map
+	var map = L.map( 'map', {
+		center: [selected.latitud, selected.longitud],
+		minZoom: 2,
+		zoom: 30
+	});
+
+	
+	L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		//  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		//  subdomains: ['a','b','c']
+	}).addTo( map );
+	
+	// var myURL = jQuery( 'script[src$="leaf-demo.js"]' ).attr( 'src' ).replace( 'leaf-demo.js', '' );
+	
+	var myIcon = L.icon({
+		iconUrl: '../images/pin24.png',
+		iconRetinaUrl: '../images/pin48.png',
+		iconSize: [29, 24],
+		iconAnchor: [9, 21],
+		popupAnchor: [0, -14]
+	});
+
+	var markerClusters = L.markerClusterGroup();
+	
+	var popup = htmlPopup(selected)
+	var m = L.marker( [selected.latitud, selected.longitud], {icon: myIcon} ).bindPopup( popup );
+	markerClusters.addLayer( m );
+	
+	data.forEach(alerta => {
+		var popup = htmlPopup(alerta)
+		
+		var m = L.marker( [alerta.latitud, alerta.longitud], {icon: myIcon} ).bindPopup( popup );
+		markerClusters.addLayer( m );
+	})
+	
+	map.addLayer( markerClusters );
+}
+
+let htmlPopup = (selected) => {
+	return `
+		<p><strong>Tipo de alerta:</strong> ${selected.tipo}</p>
+		<p><strong>Dispositivo</strong>: ${selected.dispositivo}</p>
+		<p><strong>Fecha</strong>: ${selected.fecha}</p>
+		<p><strong>Latitud</strong>: ${selected.latitud}</p>
+		<p><strong>Longitud</strong>: ${selected.longitud}</p>
+	`
+}
